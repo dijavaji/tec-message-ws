@@ -11,9 +11,9 @@ import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import ec.com.technoloqie.message.api.commons.log.MessageLog;
 import ec.com.technoloqie.message.api.dao.IIntentDao;
 import ec.com.technoloqie.message.api.dao.IProcessChatDao;
-import ec.com.technoloqie.message.api.log.MessageLog;
 import ec.com.technoloqie.message.api.model.ChatDto;
 import ec.com.technoloqie.message.api.model.Intent;
 

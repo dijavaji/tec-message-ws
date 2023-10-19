@@ -1,4 +1,4 @@
-package ec.com.technoloqie.message.api.log;
+package ec.com.technoloqie.message.api.commons.log;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

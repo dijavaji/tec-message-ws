@@ -18,6 +18,8 @@ public class ChatDto {
 	
 	private String response;
 	
+	private String data;
+	
 	//@NotEmpty(message ="no puede estar vacio")
 	//@Column(name="CREATEDBY",nullable=false)
 	private String createdBy;
@@ -106,5 +108,13 @@ public class ChatDto {
 
 	public void setResponse(String response) {
 		this.response = response;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
 	}
 }

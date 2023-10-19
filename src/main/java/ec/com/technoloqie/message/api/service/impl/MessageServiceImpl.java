@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -18,12 +19,17 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import ec.com.technoloqie.message.api.model.ChatDto;
+import ec.com.technoloqie.message.api.service.IChatBotService;
 import ec.com.technoloqie.message.api.service.IMessageService;
 
 @Service
 public class MessageServiceImpl  extends TelegramLongPollingBot implements IMessageService{
 
 	Logger logger= LoggerFactory.getLogger(MessageServiceImpl.class);
+	
+	@Autowired
+	private IChatBotService chatbotservice;
 	
 	@Override
 	public void onUpdateReceived(Update update) {
@@ -40,10 +46,12 @@ public class MessageServiceImpl  extends TelegramLongPollingBot implements IMess
 		//sendmessage.setParseMode(ParseMode.MARKDOWN);
 		if(msg.hasText()) {
 			
-			if(StringUtils.equals(StringUtils.lowerCase(msg.getText()), "hola") ) {
-				//Se obtiene el mensaje escrito por el usuario
-				final String messageTextReceived = update.getMessage().getText();
-				logger.info("excribieron en el bot." + messageTextReceived);
+			//Se obtiene el mensaje escrito por el usuario
+			final String messageTextReceived = update.getMessage().getText();
+			logger.info("excribieron en el bot." + messageTextReceived);
+			
+			if(StringUtils.equals(StringUtils.lowerCase(msg.getText()), "hola bot") ) {
+				
 				// Create a keyboard
 		        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
 		        //sendMessage.setReplyMarkup(replyKeyboardMarkup);
@@ -69,7 +77,10 @@ public class MessageServiceImpl  extends TelegramLongPollingBot implements IMess
 			}else if(StringUtils.equals(StringUtils.lowerCase(msg.getText()) , "ayuda")){
 				sendmessage.setText("Puedes navegar por el menu para acceder a las distintas respuestas automaticas.");
 			}else {
-				sendmessage.setText("No reconozco tu pregunta o solicitud.");
+				//sendmessage.setText("No reconozco tu pregunta o solicitud.");
+				ChatDto chat = chatbotservice.getChatMessage(messageTextReceived);
+				logger.info("respuesta del servicio"+ chat.getData());
+				sendmessage.setText(chat.getData());
 			}
 			
 

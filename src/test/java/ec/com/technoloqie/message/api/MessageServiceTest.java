@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import ec.com.technoloqie.message.api.log.MessageLog;
+import ec.com.technoloqie.message.api.commons.log.MessageLog;
 import ec.com.technoloqie.message.api.model.ChatDto;
 import ec.com.technoloqie.message.api.service.IProcessChatService;
 import junit.framework.Assert;

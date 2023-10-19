@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import ec.com.technoloqie.message.api.log.MessageLog;
+import ec.com.technoloqie.message.api.commons.log.MessageLog;
 import ec.com.technoloqie.message.api.model.ChatDto;
 import ec.com.technoloqie.message.api.service.IProcessChatService;
 
