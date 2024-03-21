@@ -14,6 +14,8 @@ public class ChatDto {
 	
 	private String senderId;
 	
+	private String displayName;
+	
 	private String text;
 	
 	private String response;
@@ -37,6 +39,12 @@ public class ChatDto {
 	
 	//@Column(name="STATUS")
 	private Boolean status;
+	
+	private MessageType type;
+	
+	public enum MessageType{
+		CHAT, LEAVE, JOIN
+	}
 
 	public Integer getId() {
 		return id;
@@ -116,5 +124,21 @@ public class ChatDto {
 
 	public void setData(String data) {
 		this.data = data;
+	}
+
+	public MessageType getType() {
+		return type;
+	}
+
+	public void setType(MessageType type) {
+		this.type = type;
+	}
+
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
 	}
 }
