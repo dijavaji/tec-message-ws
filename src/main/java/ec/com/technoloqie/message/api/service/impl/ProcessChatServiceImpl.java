@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ec.com.technoloqie.message.api.dao.IProcessChatDao;
-import ec.com.technoloqie.message.api.model.ChatDto;
+import ec.com.technoloqie.message.api.dto.ChatDto;
 import ec.com.technoloqie.message.api.service.IProcessChatService;
 
 @Service

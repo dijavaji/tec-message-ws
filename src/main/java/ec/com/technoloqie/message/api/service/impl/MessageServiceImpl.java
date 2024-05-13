@@ -19,7 +19,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import ec.com.technoloqie.message.api.model.ChatDto;
+import ec.com.technoloqie.message.api.dto.ChatDto;
 import ec.com.technoloqie.message.api.service.IChatBotService;
 import ec.com.technoloqie.message.api.service.IMessageService;
 
@@ -67,6 +67,7 @@ public class MessageServiceImpl  extends TelegramLongPollingBot implements IMess
 		        // Add all of the keyboard rows to the list
 		        sendmessage.setText("Hola, bienvenido");
 		        keyboard.add(createButton("Ayuda"));
+		        keyboard.add(createButton("Login"));
 		        keyboard.add(getButtonContact("Compartir contacto"));
 		        keyboard.add(getButtonLocation("Compartir ubicacion"));
 		        //keyboard.add(keyboardSecondRow);
@@ -76,11 +77,17 @@ public class MessageServiceImpl  extends TelegramLongPollingBot implements IMess
 				sendmessage.setReplyMarkup(replyKeyboardMarkup);
 			}else if(StringUtils.equals(StringUtils.lowerCase(msg.getText()) , "ayuda")){
 				sendmessage.setText("Puedes navegar por el menu para acceder a las distintas respuestas automaticas.");
+			}else if(StringUtils.equals(StringUtils.lowerCase(msg.getText()) , "login")){
+				sendmessage.setText("Ingresa tu nombre de usuario");
+			}else if(StringUtils.equals(StringUtils.lowerCase(msg.getText()) , "admin")){
+				sendmessage.setText("Ingresa tu contrasena");
+			}else if(StringUtils.equals(StringUtils.lowerCase(msg.getText()) , "123456")){
+				sendmessage.setText("Bienvenido Pepito , Hardvard");
 			}else {
 				//sendmessage.setText("No reconozco tu pregunta o solicitud.");
 				ChatDto chat = chatbotservice.getChatMessage(messageTextReceived);
-				logger.info("respuesta del servicio"+ chat.getData());
-				sendmessage.setText(chat.getData());
+				logger.info("respuesta del servicio"+ chat.getText());
+				sendmessage.setText(chat.getText());
 			}
 			
 

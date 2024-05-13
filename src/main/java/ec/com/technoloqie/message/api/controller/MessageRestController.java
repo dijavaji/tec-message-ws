@@ -12,15 +12,10 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 
 import ec.com.technoloqie.message.api.commons.log.MessageLog;
-import ec.com.technoloqie.message.api.model.ChatDto;
+import ec.com.technoloqie.message.api.dto.ChatDto;
 import ec.com.technoloqie.message.api.service.IProcessChatService;
 
 

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import ec.com.technoloqie.message.api.commons.log.MessageLog;
 import ec.com.technoloqie.message.api.dao.IIntentDao;
 import ec.com.technoloqie.message.api.dao.IProcessChatDao;
-import ec.com.technoloqie.message.api.model.ChatDto;
+import ec.com.technoloqie.message.api.dto.ChatDto;
 import ec.com.technoloqie.message.api.model.Intent;
 
 
@@ -28,14 +28,6 @@ public class ProcessChatDaoImpl implements IProcessChatDao{
 	@Autowired
 	private IIntentDao intentDao;
 	
-	@Override
-	public ChatDto getResponseChat(ChatDto chat) {
-		MessageLog.getLog().info("Ingreso a consultar chat");
-		Intent intent = this.intentDao.findById(10).orElse(null);
-		Intent intent1 = getIntent(chat.getText());
-		chat.setResponse(intent1.getResponse());
-		return chat;
-	}
 	
 	public Intent getIntent(String text) {
 		StringBuilder sql = new StringBuilder();
@@ -66,6 +58,16 @@ public class ProcessChatDaoImpl implements IProcessChatDao{
 		Intent intentres = intenLst.iterator().next();
 		
 		return intentres;
+	}
+
+
+	@Override
+	public ChatDto getResponseChat(ChatDto chat) {
+		MessageLog.getLog().info("Ingreso a consultar chat");
+		Intent intent = this.intentDao.findById(10).orElse(null);
+		Intent intent1 = getIntent(chat.getText());
+		chat.setResponse(intent1.getResponse());
+		return chat;
 	}
 
 

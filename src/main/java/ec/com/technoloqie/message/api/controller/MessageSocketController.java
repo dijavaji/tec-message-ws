@@ -12,7 +12,7 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import ec.com.technoloqie.message.api.model.ChatDto;
+import ec.com.technoloqie.message.api.dto.ChatDto;
 import ec.com.technoloqie.message.api.service.IChatBotService;
 
 
@@ -39,9 +39,14 @@ public class MessageSocketController {
 		chatmessage.setCreatedDate(new Date());
 		//sendmessage.setText("No reconozco tu pregunta o solicitud.");
 		ChatDto chat = chatbotservice.getChatMessage(chatmessage.getText());
-		logger.info("respuesta del servicio"+ chat.getData());
-		
-		chatmessage.setResponse(chat.getData());
+		logger.info("respuesta del servicio"+ chat.getText());
+		String text = null;
+		if(chat.getText()!=null) {
+			text = chat.getText();
+		}else {
+			text = "";
+		}
+		chatmessage.setResponse(text);
 		return chatmessage;
 	}
 }
