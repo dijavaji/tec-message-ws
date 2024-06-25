@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+#agrego por credenciales
+src/main/resources/application-dev.properties
+src/main/resources/application-local.properties

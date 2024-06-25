@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -27,6 +28,12 @@ import ec.com.technoloqie.message.api.service.IMessageService;
 public class MessageServiceImpl  extends TelegramLongPollingBot implements IMessageService{
 
 	Logger logger= LoggerFactory.getLogger(MessageServiceImpl.class);
+	
+	@Value("${ec.com.technoloqie.message.telegram.bot.token}")
+	private String telegramBotToken;
+	
+	@Value("${ec.com.technoloqie.message.telegram.bot.username}")
+	private String telegramBotName;
 	
 	@Autowired
 	private IChatBotService chatbotservice;
@@ -193,12 +200,12 @@ public class MessageServiceImpl  extends TelegramLongPollingBot implements IMess
 
 	@Override
 	public String getBotUsername() {
-		return "technoloqieBot";
+		return telegramBotName;
 	}
 	
 	@Override
 	public String getBotToken() {
-		return "624237783:AAGhlzzyGLFBFNGlQ802Bg59HoyMf6PA0Tw";
+		return telegramBotToken;
 	}
 
 }
