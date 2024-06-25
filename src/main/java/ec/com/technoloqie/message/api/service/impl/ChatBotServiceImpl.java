@@ -26,7 +26,7 @@ public class ChatBotServiceImpl implements IChatBotService{
 		try {
 			ChatDto msg = new ChatDto();
 			msg.setText(message);
-			ResponseChatDto responseOut = webClient.post().uri("http://127.0.0.1:8080/api/v1/messages/chat/")
+			ResponseChatDto responseOut = webClient.post().uri("http://127.0.0.1:8080/api/v1/messages/chat")
 					.contentType(MediaType.APPLICATION_JSON).bodyValue(msg).retrieve()
 					.bodyToMono(ResponseChatDto.class).block();
 
