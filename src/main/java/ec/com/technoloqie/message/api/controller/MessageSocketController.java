@@ -28,7 +28,7 @@ public class MessageSocketController {
 	@MessageMapping("/chat.register")
 	@SendTo("/topic/public")
 	public ChatDto registerMessage(@Payload ChatDto message, SimpMessageHeaderAccessor headerAccessor) {
-		headerAccessor.getSessionAttributes().put("username", message.getSenderId());
+		headerAccessor.getSessionAttributes().put("username", message.getId());
 		return message;
 	}
 	
@@ -38,15 +38,15 @@ public class MessageSocketController {
 		logger.info("mensaje por socket "+ chatmessage.getText());
 		chatmessage.setCreatedDate(new Date());
 		//sendmessage.setText("No reconozco tu pregunta o solicitud.");
-		ChatDto chat = chatbotservice.getChatMessage(chatmessage.getText());
+		ChatDto chat = chatbotservice.getChatMessage(chatmessage);
 		logger.info("respuesta del servicio"+ chat.getText());
 		String text = null;
 		if(chat.getText()!=null) {
 			text = chat.getText();
 		}else {
-			text = "";
+			text = "--error--";
 		}
-		chatmessage.setResponse(text);
-		return chatmessage;
+		chat.setResponse(text);
+		return chat;
 	}
 }

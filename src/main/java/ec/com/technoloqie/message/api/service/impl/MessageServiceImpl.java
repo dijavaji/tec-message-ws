@@ -45,7 +45,9 @@ public class MessageServiceImpl  extends TelegramLongPollingBot implements IMess
 		
 		Message msg = update.getMessage();
 		//se obtiene el id de chat del usuario
-		final long chatId = update.getMessage().getChatId();
+		final Long chatId = update.getMessage().getChatId();
+		//String baseUrl = getBaseUrl();
+		//String userName = getBotUsername();
 		
 		//se crea un objeto mensaje
 		SendMessage sendmessage = new SendMessage();
@@ -55,7 +57,8 @@ public class MessageServiceImpl  extends TelegramLongPollingBot implements IMess
 			
 			//Se obtiene el mensaje escrito por el usuario
 			final String messageTextReceived = update.getMessage().getText();
-			logger.info("excribieron en el bot." + messageTextReceived);
+			logger.info("excribieron en el bot. " + messageTextReceived + " " + chatId );
+			//logger.info("username bot. " + userName);
 			
 			if(StringUtils.equals(StringUtils.lowerCase(msg.getText()), "hola bot") ) {
 				
@@ -92,7 +95,11 @@ public class MessageServiceImpl  extends TelegramLongPollingBot implements IMess
 				sendmessage.setText("Bienvenido Pepito , Hardvard");
 			}else {
 				//sendmessage.setText("No reconozco tu pregunta o solicitud.");
-				ChatDto chat = chatbotservice.getChatMessage(messageTextReceived);
+				ChatDto messageDto = new ChatDto();
+				messageDto.setText(messageTextReceived);
+				messageDto.setId(chatId.toString());
+				messageDto.setAssistantName(getBotUsername());
+				ChatDto chat = chatbotservice.getChatMessage(messageDto);
 				logger.info("respuesta del servicio"+ chat.getText());
 				sendmessage.setText(chat.getText());
 			}
