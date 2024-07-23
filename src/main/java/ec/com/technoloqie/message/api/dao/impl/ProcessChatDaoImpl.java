@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 import ec.com.technoloqie.message.api.commons.log.MessageLog;
 import ec.com.technoloqie.message.api.dao.IIntentDao;
@@ -19,13 +18,13 @@ import ec.com.technoloqie.message.api.model.Intent;
 
 
 
-@Repository
+//@Repository
 public class ProcessChatDaoImpl implements IProcessChatDao{
 	
 	@Autowired
 	private EntityManager em;
 	
-	@Autowired
+	//@Autowired
 	private IIntentDao intentDao;
 	
 	
@@ -64,7 +63,7 @@ public class ProcessChatDaoImpl implements IProcessChatDao{
 	@Override
 	public ChatDto getResponseChat(ChatDto chat) {
 		MessageLog.getLog().info("Ingreso a consultar chat");
-		Intent intent = this.intentDao.findById(10).orElse(null);
+		//Intent intent = this.intentDao.findById(10).orElse(null);
 		Intent intent1 = getIntent(chat.getText());
 		chat.setResponse(intent1.getResponse());
 		return chat;
