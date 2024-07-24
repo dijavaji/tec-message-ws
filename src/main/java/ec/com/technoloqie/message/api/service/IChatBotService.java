@@ -5,6 +5,6 @@ import ec.com.technoloqie.message.api.dto.ChatDto;
 
 public interface IChatBotService {
 
-	ChatDto getChatMessage(String message) throws MessageException;
+	ChatDto getChatMessage(ChatDto message) throws MessageException;
 	
 }
