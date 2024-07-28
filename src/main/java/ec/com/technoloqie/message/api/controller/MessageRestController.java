@@ -9,7 +9,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -56,10 +55,10 @@ public class MessageRestController {
 		
 		try {
 			chatNew = chatbotservice.getChatMessage(chat);
-		}catch(DataAccessException e) {
+		}catch(Exception e) {
 			MessageLog.getLog().error("Error al momento de crear chat.");
 			response.put("mensaje", "Error al momento de crear chat");
-			response.put("error", e.getMessage() +" : " + e.getMostSpecificCause());
+			response.put("error", e.getMessage() +" : " + e.getMessage());
 			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		response.put("message", "Mensaje enviado correcto");
