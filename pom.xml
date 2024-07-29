@@ -72,6 +72,13 @@
 		    <artifactId>telegrambots-spring-boot-starter</artifactId>
 		    <version>6.5.0</version>
 		</dependency>
+		
+		<!-- Swagger Definition -->
+	  	<dependency>
+    		<groupId>org.springdoc</groupId>
+	      	<artifactId>springdoc-openapi-ui</artifactId>
+	      	<version>1.6.9</version>
+	  	</dependency>
 
 	</dependencies>
 
