@@ -8,27 +8,40 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import ec.com.technoloqie.message.api.commons.log.MessageLog;
 import ec.com.technoloqie.message.api.dto.ChatDto;
-import ec.com.technoloqie.message.api.service.IProcessChatService;
+import ec.com.technoloqie.message.api.service.IChatBotService;
 
 
 //@CrossOrigin(origins = {"http://127.0.0.1:4200"})
-//@RestController
-//@RequestMapping("/api")
+@RestController
+@RequestMapping("/api/v1/messages")
 public class MessageRestController {
 	
 	@Autowired
-	private IProcessChatService processService;
+	private IChatBotService chatbotservice;
+	@Value("${spring.application.name}")
+	private String appName;
 	
-	//@PostMapping("/messages")
-	//@ResponseStatus(HttpStatus.CREATED)
+	@GetMapping
+    public String getMessage() {
+        return String.format("Now this finally works out. Welcome %s",appName);
+    }
+	
+	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> createMessage(@Valid @RequestBody ChatDto chat, BindingResult result) {
 		ChatDto chatNew = null;
 		Map <String, Object> response = new HashMap<>();
@@ -42,7 +55,7 @@ public class MessageRestController {
 		}
 		
 		try {
-			chatNew = processService.getResponseChat(chat);
+			chatNew = chatbotservice.getChatMessage(chat);
 		}catch(DataAccessException e) {
 			MessageLog.getLog().error("Error al momento de crear chat.");
 			response.put("mensaje", "Error al momento de crear chat");
