@@ -87,9 +87,10 @@ public class MessageServiceImpl  extends TelegramLongPollingBot implements IMess
 				sendmessage.setReplyMarkup(replyKeyboardMarkup);
 			}else if(StringUtils.equals(StringUtils.lowerCase(msg.getText()) , "ayuda")){
 				sendmessage.setText("Puedes navegar por el menu para acceder a las distintas respuestas automaticas.");
+				//TODO eliminar nombre usuario quemado tomar desde la api de usuarios
 			}else if(StringUtils.equals(StringUtils.lowerCase(msg.getText()) , "login")){
 				sendmessage.setText("Ingresa tu nombre de usuario");
-			}else if(StringUtils.equals(StringUtils.lowerCase(msg.getText()) , "admin")){
+			}else if(StringUtils.equals(StringUtils.lowerCase(msg.getText()) , "admin@pbx.com")){
 				sendmessage.setText("Ingresa tu contrasena");
 			}else if(StringUtils.equals(StringUtils.lowerCase(msg.getText()) , "123456")){
 				sendmessage.setText("Bienvenido Pepito , Hardvard");

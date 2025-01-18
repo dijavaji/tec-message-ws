@@ -28,16 +28,16 @@ public class ChatBotServiceImpl implements IChatBotService{
 	@SuppressWarnings("static-access")
 	@Override
 	public ChatDto getChatMessage(ChatDto msg) throws MessageException {
-		MessageLog.getLog().info("Starting web client "+ msg.getText());
+		MessageLog.getLog().info("Starting web client. "+ msg.getText());
 		ChatDto chatDto = null;
 		try {
-			ResponseChatDto responseOut = webClient.post().uri(chatbotApi + "/messages/chat")
+			ResponseChatDto responseOut = webClient.post().uri(chatbotApi + "/chat")
 					.contentType(MediaType.APPLICATION_JSON).bodyValue(msg).retrieve()
 					.onStatus(HttpStatus.NOT_FOUND::equals,
 						    response -> {
 						    				//ResponseChatDto errResponse = response.bodyToMono(ResponseChatDto.class).block();
-						    				String errMsg = null;
-						    				//response.bodyToMono(ResponseChatDto.class).map(m -> m.getMessage());
+						    				String errMsg = "El servidor no pudo encontrar el contenido solicitado.";
+						    				//response.bodyToMono(ResponseChatDto.class).map(m -> {  MessageLog.getLog().info(m.getError().getDetail()); return m;});
 						    				//MessageLog.getLog().info();
 						    				//response.bodyToMono(String.class).block()
 						    				//response.bodyToMono(String.class).map(MessageException::new);
@@ -66,7 +66,7 @@ public class ChatBotServiceImpl implements IChatBotService{
 			//Map<String, Object> map = objectMapper.readValue("", new TypeReference<Map<String,Object>>(){});
 			chatDto = (ChatDto) responseOut.getData();
 		} catch(Exception e) {
-			MessageLog.getLog().info("Error al momento de preguntar al chatbot "+ e);
+			MessageLog.getLog().error("Error al momento de preguntar al chatbot ", e);
 			throw new MessageException("Error al momento de preguntar al chatbot",e);
 		}
 	    MessageLog.getLog().info("Exiting NON-BLOCKING Controller!");
