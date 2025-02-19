@@ -37,12 +37,12 @@ public class MessageServiceTest {
 			 MessageLog.getLog().info("getMessageTest.");
 			 
 			ChatDto chatmessage = new ChatDto();
-			chatmessage.setId(new Date().toString());
+			chatmessage.setUserId(new Date().toString());
 			chatmessage.setText("Hola quien eres");
 			chatmessage.setAssistantName("praxisBot");
 			ChatDto scanMsg =  chatbotservice.getChatMessage(chatmessage);
 			MessageLog.getLog().error(scanMsg.getText());
-			 Assert.assertNotNull(scanMsg);
+			Assert.assertNotNull(scanMsg);
 		 }catch(Exception e) {
 			 MessageLog.getLog().error("getMessageTest.");
 			 assertTrue("getMessageTest.",Boolean.TRUE);

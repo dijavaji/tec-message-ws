@@ -3,6 +3,7 @@ package ec.com.technoloqie.message.api.dto;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
@@ -15,9 +16,10 @@ import lombok.Setter;
 @Setter
 //@AllArgsConstructor
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ChatDto {
 
-	private String id;	//< Identificador unico del chat al que enviar el mensaje
+	private String userId;	//< Identificador unico del chat al que enviar el mensaje
 
 	//private String senderId;
 
@@ -50,7 +52,7 @@ public class ChatDto {
 			@JsonProperty("status") Boolean status, 
 			@JsonProperty("generationId")String generationId, 
 			@JsonProperty("assistantName")String assistantName) {
-		this.id = id;
+		this.userId = id;
 		//this.senderId = senderId;
 		this.text = text;
 		this.response = response;
