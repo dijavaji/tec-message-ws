@@ -68,10 +68,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("/api/v1/messages")
 public class MessageRestController {
 	
-	@Autowired
 	private IChatBotService chatbotservice;
 	@Value("${spring.application.name}")
 	private String appName;
+	
+	public MessageRestController(IChatBotService chatbotservice){
+		this.chatbotservice = chatbotservice;
+	}
 	
 	@GetMapping
     public String getMessage() {

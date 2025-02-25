@@ -37,7 +37,7 @@ public class MessageServiceTest {
 			 MessageLog.getLog().info("getMessageTest.");
 			 
 			ChatDto chatmessage = new ChatDto();
-			chatmessage.setUserId(new Date().toString());
+			chatmessage.setSenderId(new Date().toString());
 			chatmessage.setText("Hola quien eres");
 			chatmessage.setAssistantName("praxisBot");
 			ChatDto scanMsg =  chatbotservice.getChatMessage(chatmessage);

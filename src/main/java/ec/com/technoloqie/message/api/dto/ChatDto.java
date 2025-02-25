@@ -19,9 +19,8 @@ import lombok.Setter;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ChatDto {
 
-	private String userId;	//< Identificador unico del chat al que enviar el mensaje
 
-	//private String senderId;
+	private String senderId;	//< Identificador unico del chat al que enviar el mensaje
 
 	private String text;
 
@@ -42,7 +41,7 @@ public class ChatDto {
 	private String assistantName;
 	
 	@JsonCreator
-	public ChatDto(@JsonProperty("id") String id, 
+	public ChatDto(@JsonProperty("id") String senderId, 
 			@JsonProperty("text") String text, 
 			@JsonProperty("response") String response, 
 			@JsonProperty("createdBy") String createdBy, 
@@ -52,8 +51,7 @@ public class ChatDto {
 			@JsonProperty("status") Boolean status, 
 			@JsonProperty("generationId")String generationId, 
 			@JsonProperty("assistantName")String assistantName) {
-		this.userId = id;
-		//this.senderId = senderId;
+		this.senderId = senderId;
 		this.text = text;
 		this.response = response;
 		this.createdBy = createdBy;
