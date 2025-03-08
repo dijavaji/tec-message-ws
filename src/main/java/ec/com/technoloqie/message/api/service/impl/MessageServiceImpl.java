@@ -44,7 +44,6 @@ public class MessageServiceImpl  extends TelegramLongPollingBot implements IMess
 	private final Map<String, Boolean> esperandoPassword = new HashMap<>();
 	private final Map<String, String> tokens = new HashMap<>();
 	
-	@SuppressWarnings("deprecation")
 	public MessageServiceImpl(IChatBotService chatbotservice) {
 		this.chatbotservice = chatbotservice;
 	}
