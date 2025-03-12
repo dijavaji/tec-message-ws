@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -61,7 +62,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
  * </ul>
  * @version 0.1
  */
-//@CrossOrigin(origins = {"http://127.0.0.1:4200"})
+@CrossOrigin(origins = {"http://127.0.0.1:3000"})
 @RestController
 @Tag(name = "Message API", description="Microservicio de mensajer&#237;a permite crear f&#225;cilmente programas que usan mensajes para una interfaz.")
 @RequestMapping("/api/v1/messages")

@@ -16,7 +16,7 @@ import ec.com.technoloqie.message.api.dto.ChatDto;
 import ec.com.technoloqie.message.api.service.IChatBotService;
 
 
-@CrossOrigin(origins = {"http://127.0.0.1:3000"})
+@CrossOrigin(origins = {"/**"})
 @Controller
 public class MessageSocketController {
 	
@@ -28,7 +28,7 @@ public class MessageSocketController {
 	@MessageMapping("/chat.register")
 	@SendTo("/topic/public")
 	public ChatDto registerMessage(@Payload ChatDto message, SimpMessageHeaderAccessor headerAccessor) {
-		headerAccessor.getSessionAttributes().put("username", message.getId());
+		headerAccessor.getSessionAttributes().put("username", message.getUserId());
 		return message;
 	}
 	
