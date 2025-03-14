@@ -20,7 +20,6 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.Voice;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ForceReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -168,7 +167,7 @@ public class MessageServiceImpl  extends TelegramLongPollingBot implements IMess
 	private void sendChatBot(String chatId, String text) {
 		ChatDto messageDto = new ChatDto();
 		messageDto.setText(text);
-		messageDto.setUserId(chatId);
+		messageDto.setSenderId(chatId);
 		messageDto.setAssistantName(getBotUsername());
 		ChatDto chat = chatbotservice.getChatMessage(messageDto);
 		logger.info("respuesta del servicio. ".concat(chat.getText()));

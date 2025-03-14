@@ -4,7 +4,6 @@ import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -22,13 +21,16 @@ public class MessageSocketController {
 	
 	Logger logger= LoggerFactory.getLogger(MessageSocketController.class);
 	
-	@Autowired
 	private IChatBotService chatbotservice;
+	
+	public MessageSocketController(IChatBotService chatbotservice) {
+		this.chatbotservice = chatbotservice;
+	}
 	
 	@MessageMapping("/chat.register")
 	@SendTo("/topic/public")
 	public ChatDto registerMessage(@Payload ChatDto message, SimpMessageHeaderAccessor headerAccessor) {
-		headerAccessor.getSessionAttributes().put("username", message.getUserId());
+		headerAccessor.getSessionAttributes().put("username", message.getSenderId());
 		return message;
 	}
 	
@@ -36,7 +38,6 @@ public class MessageSocketController {
 	@SendTo("/topic/messages")
 	public ChatDto sendMessage(@Payload ChatDto chatmessage) {
 		logger.info("mensaje por socket "+ chatmessage.getText());
-		chatmessage.setCreatedDate(new Date());
 		//sendmessage.setText("No reconozco tu pregunta o solicitud.");
 		ChatDto chat = chatbotservice.getChatMessage(chatmessage);
 		logger.info("respuesta del servicio"+ chat.getText());
