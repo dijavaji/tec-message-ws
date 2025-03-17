@@ -1,0 +1,24 @@
+
+*.iml
+.idea/
+*.mvn/
+mvnw
+mvnw.cmd
+.classpath
+.factorypath
+.project
+.settings
+
+# Ignorar archivos temporales y de sistema
+*.log
+*.tmp
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos control de versiones
+.git/
+.gitignore
+
+
