@@ -62,7 +62,7 @@ public class ChatWebClientServiceImpl implements IChatWebClientService{
 			//chatDto = objectMapper.readValue(responseOut.getData().toString(), ChatDto.class);
 			//chatDto = objectMapper.reader().forType(ChatDto.class).readValue(respData);
 			//Map<String, Object> map = objectMapper.readValue("", new TypeReference<Map<String,Object>>(){});
-			chatDto = (ChatDto) responseOut.getData();
+			chatDto = responseOut.getData();
 		} catch(Exception e) {
 			MessageLog.getLog().error("Error al momento de preguntar al chatbot ", e);
 			throw new MessageException("Error al momento de preguntar al chatbot",e);
