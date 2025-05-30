@@ -1,6 +1,7 @@
 package ec.com.technoloqie.message.api.dto;
 
 import java.util.Date;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -40,6 +41,8 @@ public class ChatDto {
 	
 	private String assistantName;
 	
+	private Map<String, Object> metadata;
+	
 	@JsonCreator
 	public ChatDto(@JsonProperty("id") String senderId, 
 			@JsonProperty("text") String text, 
@@ -50,7 +53,8 @@ public class ChatDto {
 			@JsonProperty("modifiedDate") Date modifiedDate, 
 			@JsonProperty("status") Boolean status, 
 			@JsonProperty("generationId")String generationId, 
-			@JsonProperty("assistantName")String assistantName) {
+			@JsonProperty("assistantName")String assistantName,
+			@JsonProperty("metadata") Map<String, Object> metadata) {
 		this.senderId = senderId;
 		this.text = text;
 		this.response = response;
@@ -61,6 +65,7 @@ public class ChatDto {
 		this.status = status;
 		this.generationId = generationId;
 		this.assistantName = assistantName;
+		this.metadata = metadata;
 	}
 	
 	
