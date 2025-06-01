@@ -65,7 +65,10 @@ public class ChatWebClientServiceImpl implements IChatWebClientService{
 			chatDto = responseOut.getData();
 		} catch(Exception e) {
 			MessageLog.getLog().error("Error al momento de preguntar al chatbot ", e);
-			throw new MessageException("Error al momento de preguntar al chatbot",e);
+			//throw new MessageException("Error al momento de preguntar al chatbot",e);
+			chatDto = chat;
+			chatDto.setText(e.getMessage());
+			return chatDto;
 		}
 	    MessageLog.getLog().info("Exiting NON-BLOCKING Controller!");
 	    return chatDto;
