@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.Map;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -29,6 +28,7 @@ public class ChatDto {
 	
 	@NotBlank(message ="the label 'text' cannot be empty")
 	@NotNull(message ="the label 'text' cannot be null")
+	//@Pattern(message ="the label 'text' cannot be null", regexp="^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9.,!?¿¡:;()\\\"'\\s-]+$")
 	private String text;
 
 	private String response;
