@@ -1,5 +1,5 @@
 # Etapa de construccion
-FROM maven:latest AS build
+FROM maven:3.9-amazoncorretto-17-alpine AS build
 
 WORKDIR /app
 
