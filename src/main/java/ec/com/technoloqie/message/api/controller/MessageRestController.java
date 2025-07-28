@@ -62,6 +62,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
  * @version 0.1
  */
 @CrossOrigin(origins = {"${ec.com.technoloqie.chatbot.app.url}"})
+//@CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
 @Tag(name = "Message API", description="Microservicio de mensajer&#237;a permite crear f&#225;cilmente programas que usan mensajes para una interfaz.")
 @RequestMapping("${ec.com.technoloqie.message.api.prefix}/messages")
