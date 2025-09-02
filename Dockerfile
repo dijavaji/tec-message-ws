@@ -1,13 +1,29 @@
-#define base docker image
-FROM amazoncorretto:17-alpine-jdk
+# Etapa de construccion
+FROM maven:3.9-amazoncorretto-17-alpine AS build
 
 WORKDIR /app
 
-COPY target/*.jar /app/application.jar
+# Copiar el archivo pom.xml y el directorio src para la construccion
+COPY pom.xml .
+COPY src ./src
+
+# Construir la aplicacion
+RUN mvn clean package -DskipTests
+
+# Etapa de ejecucion
+#define base docker image
+FROM amazoncorretto:17-alpine-jdk
+
+# Establecer el directorio de trabajo
+WORKDIR /app
+
+# Copiar el JAR construido desde la etapa de construccion
+COPY --from=build /app/target/tec-message-ws-0.0.1-SNAPSHOT.jar .
+#COPY target/*.jar /app/application.jar
 
 EXPOSE 8080
 
-#CMD ["java", "-jar", "tec-account-ws-0.0.1-SNAPSHOT.jar"]
 LABEL maintainer="technoloqie.com.ec"
-#ADD target/tec-chatbot-ws-0.0.1-SNAPSHOT.jar tec-chatbot-ws.jar
-ENTRYPOINT ["java", "-jar", "application.jar"]
+
+ENTRYPOINT ["java", "-jar", "tec-message-ws-0.0.1-SNAPSHOT.jar"]
+

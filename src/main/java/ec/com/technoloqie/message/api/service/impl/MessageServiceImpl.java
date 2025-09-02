@@ -13,14 +13,20 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Audio;
 import org.telegram.telegrambots.meta.api.objects.Contact;
+import org.telegram.telegrambots.meta.api.objects.Document;
 import org.telegram.telegrambots.meta.api.objects.Location;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.PhotoSize;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.Video;
+import org.telegram.telegrambots.meta.api.objects.VideoNote;
 import org.telegram.telegrambots.meta.api.objects.Voice;
+import org.telegram.telegrambots.meta.api.objects.games.Animation;
+import org.telegram.telegrambots.meta.api.objects.payments.Invoice;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ForceReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
+import org.telegram.telegrambots.meta.api.objects.stickers.Sticker;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import ec.com.technoloqie.message.api.commons.util.TelegramUtils;
@@ -71,7 +77,20 @@ public class MessageServiceImpl  extends TelegramLongPollingBot implements IMess
 				processAudio(chatId.toString(), msg.getAudio());
 			}else if(msg.hasPhoto()) {
 				processImage(chatId.toString(), msg.getPhoto());
+			}else if(msg.hasDocument()) {
+				processDocument(chatId.toString(), msg.getDocument());
+			}else if(msg.hasSticker()) {
+				processSticker(chatId.toString(), msg.getSticker());
+			}else if(msg.hasAnimation()) {
+				processAnimation(chatId.toString(), msg.getAnimation()); 
+			}else if(msg.hasInvoice()) {
+				processInvoice(chatId.toString(), msg.getInvoice());
+			}else if(msg.hasVideo()) {
+				processVideo(chatId.toString(), msg.getVideo());
+			}else if(msg.hasVideoNote()) {
+				processVideoNote(chatId.toString(), msg.getVideoNote());
 			}
+			
 		}
 	}
 	
@@ -97,6 +116,10 @@ public class MessageServiceImpl  extends TelegramLongPollingBot implements IMess
 		case "/login":
 			requestPassword(chatId);
 			break;
+		case "/start":
+			//TODO tomar msj de la base
+			sendMsg(chatId, "¡Hola!😉 soy tu asesor virtual. Solo puedo proporcionar informaci\u00f3n Por favor, visita nuestra p\u00e1gina oficial para m\u00e1s informaci\u00f3n: https://technoloqie.site o ponte en contacto con info@technoloqie.site ¿En qu\u00e9 puedo ayudarte?");
+			break;
 		case "Ayuda":
 			sendMsg(chatId, "📌 Opciones disponibles:\n- Comprar productos\n- Login\n- Ayuda");
 			break;
@@ -108,7 +131,7 @@ public class MessageServiceImpl  extends TelegramLongPollingBot implements IMess
 
 	private void processVoice(String chatId, Voice voice) {
 		// TODO Auto-generated method stub
-		sendMsg(chatId, "🎵 Recib\u00ed tu msj de voz. ".concat(voice.getFileSize().toString()).concat("¡Gracias!") );
+		sendMsg(chatId, "🎵 Recib\u00ed tu msj de voz. ".concat(voice.getFileSize().toString()).concat(" ¡Gracias!") );
 	}
 
 	private void processLocation(String chatId, Location location) {
@@ -119,7 +142,7 @@ public class MessageServiceImpl  extends TelegramLongPollingBot implements IMess
 
 	private void processAudio(String chatId, Audio audio) {
 		// TODO Auto-generated method stub
-		sendMsg(chatId, "🎵 Recib\u00ed tu audio.".concat(audio.getDuration().toString()).concat("¡Gracias!") );
+		sendMsg(chatId, "🎵 Recib\u00ed tu audio.".concat(audio.getDuration().toString()).concat(" ¡Gracias!") );
 	}
 
 	private void processContact(Long chatId, Contact contact) {
@@ -136,7 +159,36 @@ public class MessageServiceImpl  extends TelegramLongPollingBot implements IMess
 		// TODO Auto-generated method stub
 		sendMsg(chatId, "🤖 Recib\u00ed tu imagen.".concat(" "+ list.size()).concat("¡Gracias!") );
 	}
+	
+	private void processDocument(String chatId, Document document) {
+		// TODO Auto-generated method stub
+		sendMsg(chatId, "📄 Recib\u00ed tu archivo.".concat(" "+ document.getMimeType()).concat(" ¡Gracias!") );
+	}
+	
+	private void processSticker(String chatId, Sticker sticker) {
+		// TODO Auto-generated method stub
+		sendMsg(chatId, "🔖 Recib\u00ed tu sticker.".concat(" "+ sticker.getEmoji()).concat(" ¡Gracias!") );
+	}
+	
+	private void processAnimation(String chatId, Animation animation) {
+		// TODO Auto-generated method stub
+		sendMsg(chatId, "🤖 Recib\u00ed tu animacion.".concat(" "+ animation.getFileName()).concat(" ¡Gracias!") );
+	}
+	
+	private void processVideoNote(String chatId, VideoNote videoNote) {
+		// TODO Auto-generated method stub
+		sendMsg(chatId, "🤖 Recib\u00ed tu videio.".concat(" "+ videoNote.getFileUniqueId()).concat(" ¡Gracias!") );
+	}
 
+	private void processVideo(String chatId, Video video) {
+		// TODO Auto-generated method stub
+		sendMsg(chatId, "🤖 Recib\u00ed tu video.".concat(" "+ video.getFileName()).concat(" ¡Gracias!") );
+	}
+
+	private void processInvoice(String chatId, Invoice invoice) {
+		// TODO Auto-generated method stub
+		sendMsg(chatId, "🤖 Recib\u00ed tu pago.".concat(" "+ invoice.getTotalAmount()).concat(" ¡Gracias!") );
+	}
 	
 	 /**
      * Procesa el login con la pass enviada de manera privada.

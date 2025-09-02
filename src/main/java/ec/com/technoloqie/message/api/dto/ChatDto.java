@@ -3,6 +3,9 @@ package ec.com.technoloqie.message.api.dto;
 import java.util.Date;
 import java.util.Map;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,7 +25,10 @@ public class ChatDto {
 
 
 	private String senderId;	//< Identificador unico del chat al que enviar el mensaje
-
+	
+	@NotBlank(message ="the label 'text' cannot be empty")
+	@NotNull(message ="the label 'text' cannot be null")
+	//@Pattern(message ="the label 'text' cannot be null", regexp="^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9.,!?¿¡:;()\\\"'\\s-]+$")
 	private String text;
 
 	private String response;
@@ -39,6 +45,8 @@ public class ChatDto {
 
 	private String generationId;
 	
+	@NotBlank(message ="the label 'assistantName' cannot be empty")
+	@NotNull(message ="the label 'assistantName' cannot be null")
 	private String assistantName;
 	
 	private Map<String, Object> metadata;
