@@ -1,6 +1,6 @@
 # Smart Chatbot Platform
 
-![Chatbot Banner](https://via.placeholder.com/1000x300?text=Smart+Chatbot+Platform)
+![Chatbot Banner](https://technoloqie.cloud/img/logo1.png)
 
 ## 🚀 Vision and Purpose
 The **Smart Chatbot Platform** is an enterprise-grade solution designed to revolutionize digital marketing and customer service. By leveraging Artificial Intelligence, Machine Learning (Transformers/NLP), and a robust microservices architecture, the platform enables companies to provide 24/7 automated, natural, and secure interactions.
@@ -38,7 +38,8 @@ The system is built on a modular microservices architecture, ensuring high avail
 
 ### 🗺️ System Architecture
 <div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;lightbox&quot;:false,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;page&quot;:3,&quot;dark-mode&quot;:&quot;light&quot;,&quot;toolbar&quot;:&quot;zoom layers tags&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;url&quot;:&quot;https://drive.google.com/uc?id=11qEmWJ0ir9RmQVn_2lMrIeYkJvzS8wEo&amp;export=download&quot;}"></div>
-*Refer to [diagrams](https://dijavaji.github.io/tec-chatbot-paper/) for full DFD and Sequence diagrams.*
+*Refer to diagrams for full DFD and Sequence diagrams.*
+[diagrams](https://dijavaji.github.io/tec-chatbot-paper/)
 
 ### 💬 Chat Interface
 ![Frontend Screenshot](https://via.placeholder.com/800x400?text=tec-chat-app+Interface+Preview)
@@ -91,13 +92,12 @@ MONGODB_URI=mongodb://localhost:27017/vector_db
 
 ## 📚 Technical Documentation
 For a deep dive into the system's design, refer to the following local documents:
-*   [Vision Document](./documents/VISIONDOC.md): Business goals and scope.
-*   [System Diagrams](./documents/02-diagrams.md): DFD, Sequence, and ER diagrams.
-*   [User Stories](./documents/05-userhistory-document.md): Functional requirements and acceptance criteria.
+*   [System Diagrams](https://dijavaji.github.io/tec-chatbot-paper/02-diagrams.html): DFD, Sequence, and ER diagrams.
+*   [User Stories](https://dijavaji.github.io/tec-chatbot-paper/05-userhistory-document.html): Functional requirements and acceptance criteria.
 
 ---
 
 ## 📄 License
 This project is licensed under the **Apache License 2.0** - see the [LICENSE](LICENSE) file for details.
 
-Developed by **dvasquez.** as part of the Technoloqie.
+Developed by **dvasquez** as part of the Technoloqie.
