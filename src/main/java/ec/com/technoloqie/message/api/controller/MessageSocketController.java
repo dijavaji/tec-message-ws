@@ -35,7 +35,7 @@ public class MessageSocketController {
 	@MessageMapping("/chat")
 	@SendTo("/topic/messages")
 	public ChatDto sendMessage(@Payload ChatDto chatmessage) {
-		logger.info("mensaje por socket "+ chatmessage.getText());
+		logger.info("mensaje por socket {} --- {}",chatmessage.getSenderId() ,chatmessage.getText());
 		//sendmessage.setText("No reconozco tu pregunta o solicitud.");
 		ChatDto chat = chatbotservice.getChatMessage(chatmessage);
 		logger.info("respuesta del servicio"+ chat.getText());
