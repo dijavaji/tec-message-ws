@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.ActionType;
+import org.telegram.telegrambots.meta.api.methods.send.SendChatAction;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Audio;
 import org.telegram.telegrambots.meta.api.objects.Contact;
@@ -64,33 +66,41 @@ public class MessageServiceImpl  extends TelegramLongPollingBot implements IMess
 			final Long chatId = update.getMessage().getChatId();
 			// String baseUrl = getBaseUrl();
 			// String userName = getBotUsername();
-			// Si el mensaje contiene texto
-			if (msg.hasText()) {
-				processMessageText(chatId.toString(), msg.getText());
-			}else if (msg.hasContact()) {
-				processContact(chatId, msg.getContact());
-			}else if (msg.hasVoice()) {
-				processVoice(chatId.toString(), msg.getVoice());
-			}else if(msg.hasLocation()){
-				processLocation(chatId.toString(), msg.getLocation());
-			}else if(msg.hasAudio()) {
-				processAudio(chatId.toString(), msg.getAudio());
-			}else if(msg.hasPhoto()) {
-				processImage(chatId.toString(), msg.getPhoto());
-			}else if(msg.hasDocument()) {
-				processDocument(chatId.toString(), msg.getDocument());
-			}else if(msg.hasSticker()) {
-				processSticker(chatId.toString(), msg.getSticker());
-			}else if(msg.hasAnimation()) {
-				processAnimation(chatId.toString(), msg.getAnimation()); 
-			}else if(msg.hasInvoice()) {
-				processInvoice(chatId.toString(), msg.getInvoice());
-			}else if(msg.hasVideo()) {
-				processVideo(chatId.toString(), msg.getVideo());
-			}else if(msg.hasVideoNote()) {
-				processVideoNote(chatId.toString(), msg.getVideoNote());
-			}
+
+			// Enviar accion "typing" antes de la operacion
+            sendTyping(chatId);
 			
+            try {
+				// Si el mensaje contiene texto
+				if (msg.hasText()) {
+					processMessageText(chatId.toString(), msg.getText());
+				}else if (msg.hasContact()) {
+					processContact(chatId, msg.getContact());
+				}else if (msg.hasVoice()) {
+					processVoice(chatId.toString(), msg.getVoice());
+				}else if(msg.hasLocation()){
+					processLocation(chatId.toString(), msg.getLocation());
+				}else if(msg.hasAudio()) {
+					processAudio(chatId.toString(), msg.getAudio());
+				}else if(msg.hasPhoto()) {
+					processImage(chatId.toString(), msg.getPhoto());
+				}else if(msg.hasDocument()) {
+					processDocument(chatId.toString(), msg.getDocument());
+				}else if(msg.hasSticker()) {
+					processSticker(chatId.toString(), msg.getSticker());
+				}else if(msg.hasAnimation()) {
+					processAnimation(chatId.toString(), msg.getAnimation()); 
+				}else if(msg.hasInvoice()) {
+					processInvoice(chatId.toString(), msg.getInvoice());
+				}else if(msg.hasVideo()) {
+					processVideo(chatId.toString(), msg.getVideo());
+				}else if(msg.hasVideoNote()) {
+					processVideoNote(chatId.toString(), msg.getVideoNote());
+				}
+            }catch(Exception e) {
+            	logger.info("Error al clasificar mensaje" + e.getMessage());
+            	sendMsg(chatId.toString(), "Ocurri\\u00f3 un error: " + e.getMessage());
+            }
 		}
 	}
 	
@@ -297,6 +307,17 @@ public class MessageServiceImpl  extends TelegramLongPollingBot implements IMess
 
         try {
             execute(mensaje);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void sendTyping(Long chatId) {
+        SendChatAction chatAction = new SendChatAction();
+        chatAction.setChatId(chatId.toString());
+        chatAction.setAction(ActionType.TYPING); // o ChatAction.TYPING si tu versión lo define
+        try {
+            execute(chatAction);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
